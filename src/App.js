@@ -3,8 +3,10 @@ import Cards from './components/Cards.jsx';
 import Nav from './components/Nav';
 import { useState } from 'react';
 import axios from 'axios';
-
-
+import {Routes, Route} from 'react-router-dom';
+import About from './components/About';
+import Login from './components/Login';
+import Detail from './components/Detail';
 
 function App() {
 
@@ -15,6 +17,8 @@ function App() {
       .then(response => response.data)
       .then((data) => {
          if (data.name) {
+            const char = characters.find((ch) => ch.id === Number(id))
+            if(char) return alert('El personaje ya existe')
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
             alert('¡No hay personajes con este ID!');
@@ -30,7 +34,14 @@ function App() {
    return (
       <div className='App'>
          <Nav onSearch={onSearch}/>
-         <Cards characters={characters} onClose={onClose}/>
+         
+         <Routes>
+            <Route path='/' element={<Login/>}/>
+            <Route path='/home' element={<Cards characters={characters} onClose={onClose}/>}/>
+            <Route path='/about' element={<About/>}/>
+            <Route path='/detail/:id' element={<Detail />}/>
+         </Routes>
+         
       </div>
    );
 }
