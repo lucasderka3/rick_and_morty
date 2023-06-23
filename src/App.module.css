@@ -1,0 +1,27 @@
+*{
+    background-position: center center;
+    background-image: url('./img/nebula-1922570_1920.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: border-box;
+    background-attachment: fixed;
+}
+
+
+@media (max-width: 768px) {
+    .App {
+      background-size: cover;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .App {
+      background-size: cover;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .App {
+      background-size: cover;
+    }
+  }

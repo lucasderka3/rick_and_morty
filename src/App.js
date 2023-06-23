@@ -1,16 +1,35 @@
-import './App.css';
-import Cards from './components/Cards.jsx';
-import Nav from './components/Nav';
-import { useState } from 'react';
+
+import Cards from './components/Cards/Cards.jsx';
+import Nav from './components/Nav/Nav';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Routes, Route} from 'react-router-dom';
-import About from './components/About';
-import Login from './components/Login';
-import Detail from './components/Detail';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import About from './components/About/About';
+import Detail from './components/Detail/Detail';
+import Form from './components/Form/Form';
+import styles from './App.module.css';
+import Favorites from './components/Favorites/Favorites.jsx';
+
+const email = 'l@gmail.com';
+const password = 'lucas123'
+
 
 function App() {
-
+   const location = useLocation();
+   const navigate = useNavigate();
    const [characters, setCharacters] = useState([]);
+   const [access, setAccess] = useState(false);
+
+   const login = (userData) => {
+      if(userData.email === email && userData.password === password){
+         setAccess(true);
+         navigate('/home');
+      }
+   }
+
+   useEffect(() => {
+      !access && navigate('/')
+   }, [access])
 
    const onSearch = (id) => {
       axios(`https://rickandmortyapi.com/api/character/${id}`)
@@ -32,14 +51,17 @@ function App() {
    }
 
    return (
-      <div className='App'>
-         <Nav onSearch={onSearch}/>
+      <div className={styles.App}>
+         {
+            location.pathname !== '/' && <Nav onSearch={onSearch}/>
+         }
          
          <Routes>
-            <Route path='/' element={<Login/>}/>
+            <Route path='/' element={<Form login={login}/>}/>
             <Route path='/home' element={<Cards characters={characters} onClose={onClose}/>}/>
             <Route path='/about' element={<About/>}/>
             <Route path='/detail/:id' element={<Detail />}/>
+            <Route path='/favorites' element={<Favorites/>}/>
          </Routes>
          
       </div>

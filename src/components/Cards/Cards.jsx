@@ -1,8 +1,9 @@
-import Card from './Card';
+import Card from '../Card/Card';
+import styles from './Cards.module.css'
 
 const Cards = ({characters, onClose}) => {
    return (
-      <div>
+      <div className={styles.cards}>
          {
             characters.map(({id, name, status, species, gender, origin, image}) =>{
                return(
@@ -10,10 +11,10 @@ const Cards = ({characters, onClose}) => {
                   key={id} 
                   id={id}
                   name={name}
-                  status={status}
+                  // status={status}
                   species={species}
                   gender={gender}
-                  origin={origin.name}
+                  // origin={origin.name}
                   image={image}
                   onClose={onClose}
                   />
