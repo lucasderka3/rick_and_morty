@@ -1,0 +1,27 @@
+
+.container{
+    padding: 50px 400px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info{
+    color: #ffffff;
+    position: relative;
+    right: 200px;
+    top: 100px;
+    border-radius: 30px;
+    padding: 9px;
+    box-shadow: 2px 2px 15px #ccff33;
+}
+
+.img img{
+    border-radius: 30px;
+    position: relative;
+    left: 160px;
+    bottom: 200px;
+    box-shadow: 2px 2px 15px #ccff33;
+}
+
